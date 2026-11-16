@@ -1,0 +1,3 @@
+Tool: built-in image_gen. Background: cream.
+
+Minimal naive line drawing of one small jam jar with a blank label, a pear and three fruit jelly squares. Flat uniform solid cream background hex #f3f2e9. ONLY dark brown hex #513a31 pen outlines, like a quick charming imperfect hand doodle on a French bistro menu. Entire objects and interiors same cream as background. Extremely sparse details, about 20 loose wobbly strokes, thick legible lines. Compact centered horizontal composition. No people, no faces, no hands. No text. Absolutely no shadows, no glow, no gradients, no lighting effects, no rendering, no crosshatching, no textures, no filled areas except tiny brown accents. Flat 2D simple outline drawing.

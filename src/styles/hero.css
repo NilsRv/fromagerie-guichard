@@ -1,0 +1,361 @@
+.hero-scene {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  min-height: var(--hero-height);
+  overflow: hidden;
+  color: var(--cream);
+  background: #3d4232;
+}
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% center;
+  z-index: -2;
+}
+.hero-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgb(32 27 22 / 28%),
+    rgb(32 27 22 / 43%) 60%,
+    rgb(32 27 22 / 22%)
+  );
+}
+.hero-scene-content {
+  width: 100%;
+  padding: 64px 4%;
+  text-align: center;
+}
+.hero-scene h1 {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.45em;
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+.hero-scene h1 > span:first-child {
+  white-space: nowrap;
+  font-family: "Sorts Mill Goudy", Georgia, serif;
+}
+.hero-occasion {
+  display: inline-grid;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  width: max-content;
+}
+.hero-occasion > span {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  animation: occasion-in 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-occasion > .hero-occasion-measure {
+  visibility: hidden;
+  animation: none;
+  pointer-events: none;
+}
+.hero-scene-links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(40px, 8vw, 150px);
+  margin-top: clamp(76px, 9vw, 140px);
+}
+.hero-scene-links a {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--cream);
+  padding-bottom: 5px;
+  border-bottom: 2px dotted currentColor;
+}
+.hero-scene-links a:hover,
+.hero-scene-links a:focus-visible {
+  color: var(--cream);
+  border-bottom-style: dotted;
+}
+@keyframes occasion-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+@media (max-width: 1000px) {
+  .hero-scene h1 {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.05em;
+    font-size: 56px;
+  }
+  .hero-occasion {
+    text-align: center;
+  }
+}
+@media (max-width: 600px) {
+  .hero-scene-content {
+    padding: 55px 18px;
+  }
+  .hero-scene h1 {
+    font-size: 34px;
+  }
+  .hero-occasion {
+    font-size: 1.25em;
+  }
+  .hero-scene-links {
+    gap: 26px;
+    margin-top: 75px;
+  }
+  .hero-scene-links a {
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-occasion > span {
+    animation: none;
+  }
+}
+@media (max-height: 500px) and (min-width: 601px) {
+  .hero-scene-content {
+    padding-block: 24px;
+  }
+  .hero-scene-links {
+    margin-top: 30px;
+  }
+}
+.hero-stage {
+  --hero-height: calc(100svh - var(--nav-height) - var(--nav-top));
+  height: calc(var(--hero-height) * 2);
+  margin-bottom: calc(var(--hero-height) * -1);
+  position: relative;
+  isolation: isolate;
+}
+.hero-stage .hero-scene {
+  position: sticky;
+  top: calc(var(--nav-top) + var(--nav-height));
+  height: var(--hero-height);
+}
+.hero-stage .hero-backdrop {
+  transform: translate3d(0, var(--hero-drift, 0px), 0) scale(1.14);
+  will-change: transform;
+}
+.hero-stage + .selection {
+  position: relative;
+  z-index: auto;
+  background: var(--cream);
+}
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .hero-stage {
+    --hero-height: min(70svh, 780px);
+  }
+  .hero-backdrop {
+    object-position: center;
+  }
+  .hero-scene-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-block: clamp(48px, 8svh, 86px);
+    text-shadow: 0 2px 16px rgb(32 27 22 / 18%);
+  }
+  .hero-scene h1 {
+    font-size: 72px;
+  }
+  .hero-scene::before {
+    background: linear-gradient(
+      180deg,
+      rgb(32 27 22 / 43%),
+      rgb(32 27 22 / 30%) 30%,
+      rgb(32 27 22 / 5%) 52%,
+      rgb(32 27 22 / 20%) 70%,
+      rgb(32 27 22 / 55%)
+    );
+  }
+  .hero-scene-links {
+    margin-top: 32px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage {
+    height: auto;
+    margin-bottom: 0;
+  }
+  .hero-stage .hero-scene {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+  .hero-stage .hero-backdrop {
+    transform: none;
+    will-change: auto;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+  .hero-scene h1 {
+    font-size: 38px;
+  }
+  .hero-scene-links a {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1600px) {
+  .hero-scene h1 {
+    font-size: 88px;
+  }
+  .hero-scene-links a {
+    font-size: 26px;
+  }
+}
+@media (min-width: 1920px) {
+  .hero-scene h1 {
+    font-size: 100px;
+  }
+  .hero-scene-links a {
+    font-size: 28px;
+  }
+}
+
+/* Mobile composition: stacked title and full dotted button outlines. */
+@media (max-width: 750px) {
+  .hero-scene-content {
+    padding: 48px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+  }
+  .hero-scene h1 {
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .hero-occasion {
+    width: auto;
+    font-size: 48px;
+    line-height: 1.3;
+    text-align: center;
+  }
+  .hero-scene-links {
+    flex-direction: column;
+    align-items: stretch;
+    width: 75vw;
+    gap: 16px;
+    margin-top: 0;
+  }
+  .hero-scene-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 56px;
+    padding: 12px 16px;
+    border: 2px dotted currentColor;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+@media (max-width: 359px) {
+  .hero-scene h1 {
+    font-size: 34px;
+  }
+  .hero-occasion {
+    font-size: 40px;
+  }
+  .hero-scene-links a {
+    font-size: 18px;
+  }
+}
+@media (min-width: 480px) and (max-width: 750px) {
+  .hero-scene h1 {
+    font-size: 48px;
+  }
+  .hero-occasion {
+    font-size: 52px;
+  }
+}
+
+/* Quiet CTA feedback without moving the label or changing layout. */
+@media (min-width: 751px) {
+  .hero-scene-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 320px));
+    align-items: stretch;
+    gap: 48px;
+  }
+  .hero-scene-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    padding: 12px 24px;
+    border: 2px dotted currentColor;
+    background: rgb(32 27 22 / 12%);
+  }
+}
+.hero-link-label {
+  display: block;
+  line-height: 1.4;
+}
+.dotted-cta {
+  position: relative;
+  isolation: isolate;
+}
+.dotted-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border: 0;
+  background: rgb(243 242 233 / 12%);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .dotted-cta:hover::before {
+    opacity: 1;
+  }
+}
+.dotted-cta:focus-visible::before,
+.dotted-cta:active::before {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dotted-cta::before {
+    transition: none;
+  }
+}
+
+.selection-copy .dotted-cta::before {
+  background: rgb(74 52 39 / 6%);
+}
+
+/* Bring the next heading into the first desktop viewport. */
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .selection {
+    padding-top: 56px;
+  }
+}

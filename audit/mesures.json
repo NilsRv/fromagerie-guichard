@@ -1,0 +1,349 @@
+[
+  {
+    "width": 1440,
+    "home": {
+      "height": 6291,
+      "overflow": false,
+      "resources": [
+        {
+          "url": "sorts-mill-goudy.ttf",
+          "bytes": 121672
+        },
+        {
+          "url": "index-B2NCYj5w.css",
+          "bytes": 48350
+        },
+        {
+          "url": "index-BlanAO1Y.js",
+          "bytes": 295513
+        },
+        {
+          "url": "hero-fromages-v3-C5YkbC2E.webp",
+          "bytes": 180472
+        },
+        {
+          "url": "poppins-SemiBold.ttf",
+          "bytes": 157612
+        },
+        {
+          "url": "poppins-Regular.ttf",
+          "bytes": 160616
+        },
+        {
+          "url": "sorts-mill-goudy-italic.ttf",
+          "bytes": 105984
+        },
+        {
+          "url": "favicon.svg",
+          "bytes": 527
+        },
+        {
+          "url": "fromages1-BDzilx8a.webp",
+          "bytes": 138774
+        },
+        {
+          "url": "plateau2-9t8vUGBZ.webp",
+          "bytes": 67806
+        },
+        {
+          "url": "illustration-plateaux-v1-VCCi9uvi.png",
+          "bytes": 1223119
+        },
+        {
+          "url": "comptoir2-koAHOUnX.webp",
+          "bytes": 137476
+        },
+        {
+          "url": "fromage-enavant-DMSPedus.webp",
+          "bytes": 107736
+        }
+      ],
+      "smallText": [
+        {
+          "text": "Note relevée le 9 octobre 2026",
+          "size": "10px"
+        },
+        {
+          "text": "Visite en mars · Extrait d’un avis Google",
+          "size": "11px"
+        }
+      ]
+    }
+  },
+  {
+    "navigationFocus": {
+      "tag": "A",
+      "text": "Fromages",
+      "h1": "Du goût, ducaractère."
+    }
+  },
+  {
+    "missingStatus": 200,
+    "robotsStatus": 200
+  },
+  {
+    "width": 390,
+    "home": {
+      "height": 6685,
+      "overflow": false,
+      "resources": [
+        {
+          "url": "sorts-mill-goudy.ttf",
+          "bytes": 121672
+        },
+        {
+          "url": "index-BlanAO1Y.js",
+          "bytes": 295513
+        },
+        {
+          "url": "index-B2NCYj5w.css",
+          "bytes": 48350
+        },
+        {
+          "url": "hero-fromages-v3-C5YkbC2E.webp",
+          "bytes": 180472
+        },
+        {
+          "url": "poppins-SemiBold.ttf",
+          "bytes": 157612
+        },
+        {
+          "url": "sorts-mill-goudy-italic.ttf",
+          "bytes": 105984
+        },
+        {
+          "url": "poppins-Regular.ttf",
+          "bytes": 160616
+        },
+        {
+          "url": "favicon.svg",
+          "bytes": 527
+        },
+        {
+          "url": "fromages1-BDzilx8a.webp",
+          "bytes": 138774
+        },
+        {
+          "url": "plateau2-9t8vUGBZ.webp",
+          "bytes": 67806
+        },
+        {
+          "url": "comptoir2-koAHOUnX.webp",
+          "bytes": 137476
+        },
+        {
+          "url": "illustration-plateaux-v1-VCCi9uvi.png",
+          "bytes": 1223119
+        },
+        {
+          "url": "fromage-enavant-DMSPedus.webp",
+          "bytes": 107736
+        }
+      ],
+      "smallText": [
+        {
+          "text": "Note relevée le 9 octobre 2026",
+          "size": "10px"
+        },
+        {
+          "text": "Visite en mars · Extrait d’un avis Google",
+          "size": "10px"
+        },
+        {
+          "text": "© 2026 Fromagerie Guichard",
+          "size": "10px"
+        },
+        {
+          "text": "Informations & confidentialité",
+          "size": "10px"
+        }
+      ]
+    }
+  },
+  {
+    "mobileTab": [
+      {
+        "text": "Panier(0)",
+        "tag": "BUTTON"
+      },
+      {
+        "text": "Choisir mon plateau",
+        "tag": "A"
+      },
+      {
+        "text": "Trouver la fromagerie",
+        "tag": "A"
+      },
+      {
+        "text": "Découvrir les plateaux",
+        "tag": "A"
+      },
+      {
+        "text": "Explorer les fromages",
+        "tag": "A"
+      },
+      {
+        "text": "Voir les autres produits",
+        "tag": "A"
+      },
+      {
+        "text": "Faire ma sélection",
+        "tag": "A"
+      },
+      {
+        "text": "Lire tous les avis",
+        "tag": "A"
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "home": {
+      "height": 6588,
+      "overflow": false,
+      "resources": [
+        {
+          "url": "sorts-mill-goudy.ttf",
+          "bytes": 121672
+        },
+        {
+          "url": "index-BlanAO1Y.js",
+          "bytes": 295513
+        },
+        {
+          "url": "index-B2NCYj5w.css",
+          "bytes": 48350
+        },
+        {
+          "url": "hero-fromages-v3-C5YkbC2E.webp",
+          "bytes": 180472
+        },
+        {
+          "url": "poppins-SemiBold.ttf",
+          "bytes": 157612
+        },
+        {
+          "url": "sorts-mill-goudy-italic.ttf",
+          "bytes": 105984
+        },
+        {
+          "url": "poppins-Regular.ttf",
+          "bytes": 160616
+        },
+        {
+          "url": "favicon.svg",
+          "bytes": 527
+        },
+        {
+          "url": "plateau2-9t8vUGBZ.webp",
+          "bytes": 67806
+        },
+        {
+          "url": "fromages1-BDzilx8a.webp",
+          "bytes": 138774
+        },
+        {
+          "url": "comptoir2-koAHOUnX.webp",
+          "bytes": 137476
+        },
+        {
+          "url": "fromage-enavant-DMSPedus.webp",
+          "bytes": 107736
+        },
+        {
+          "url": "illustration-plateaux-v1-VCCi9uvi.png",
+          "bytes": 1223119
+        }
+      ],
+      "smallText": [
+        {
+          "text": "Note relevée le 9 octobre 2026",
+          "size": "10px"
+        },
+        {
+          "text": "Visite en mars · Extrait d’un avis Google",
+          "size": "10px"
+        },
+        {
+          "text": "© 2026 Fromagerie Guichard",
+          "size": "10px"
+        },
+        {
+          "text": "Informations & confidentialité",
+          "size": "10px"
+        }
+      ]
+    }
+  },
+  {
+    "width": 768,
+    "home": {
+      "height": 5586,
+      "overflow": false,
+      "resources": [
+        {
+          "url": "sorts-mill-goudy.ttf",
+          "bytes": 121672
+        },
+        {
+          "url": "index-B2NCYj5w.css",
+          "bytes": 48350
+        },
+        {
+          "url": "index-BlanAO1Y.js",
+          "bytes": 295513
+        },
+        {
+          "url": "hero-fromages-v3-C5YkbC2E.webp",
+          "bytes": 180472
+        },
+        {
+          "url": "poppins-Regular.ttf",
+          "bytes": 160616
+        },
+        {
+          "url": "poppins-SemiBold.ttf",
+          "bytes": 157612
+        },
+        {
+          "url": "sorts-mill-goudy-italic.ttf",
+          "bytes": 105984
+        },
+        {
+          "url": "plateau2-9t8vUGBZ.webp",
+          "bytes": 67806
+        },
+        {
+          "url": "fromages1-BDzilx8a.webp",
+          "bytes": 138774
+        },
+        {
+          "url": "comptoir2-koAHOUnX.webp",
+          "bytes": 137476
+        },
+        {
+          "url": "fromage-enavant-DMSPedus.webp",
+          "bytes": 107736
+        },
+        {
+          "url": "illustration-plateaux-v1-VCCi9uvi.png",
+          "bytes": 1223119
+        },
+        {
+          "url": "favicon.svg",
+          "bytes": 527
+        }
+      ],
+      "smallText": [
+        {
+          "text": "Note relevée le 9 octobre 2026",
+          "size": "10px"
+        },
+        {
+          "text": "Visite en mars · Extrait d’un avis Google",
+          "size": "11px"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,341 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "route": "/",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/plateaux",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/fromages",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/autres-produits",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/a-propos",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/contact",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/informations",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1440,
+      "route": "/page-inconnue",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/plateaux",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/fromages",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/autres-produits",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/a-propos",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/contact",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/informations",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1920,
+      "route": "/page-inconnue",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/plateaux",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/fromages",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/autres-produits",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/a-propos",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/contact",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/informations",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 1024,
+      "route": "/page-inconnue",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/plateaux",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/fromages",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/autres-produits",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/a-propos",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/contact",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/informations",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 768,
+      "route": "/page-inconnue",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/plateaux",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/fromages",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/autres-produits",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/a-propos",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/contact",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/informations",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 390,
+      "route": "/page-inconnue",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/plateaux",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/fromages",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/autres-produits",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/a-propos",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/contact",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/informations",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    },
+    {
+      "width": 320,
+      "route": "/page-inconnue",
+      "overflow": false,
+      "broken": [],
+      "headings": 1
+    }
+  ],
+  "errors": []
+}

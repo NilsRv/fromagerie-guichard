@@ -1,0 +1,633 @@
+/* Shared editorial language: paper, ink, generous type and offset photographs. */
+.section-index {
+  display: block;
+  font:
+    400 11px/1.6 Poppins,
+    sans-serif;
+  letter-spacing: 0.13em;
+}
+.paper-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 60px;
+  width: fit-content;
+  max-width: 100%;
+  padding: 14px 24px;
+  border: 2px dotted currentColor;
+  font: 400 22px/1.35 var(--serif);
+}
+.paper-link::before {
+  background: rgb(81 58 49 / 6%);
+}
+.collection-page .product-card {
+  display: block;
+}
+.pickup-note {
+  margin-top: 36px;
+  padding: 22px 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.pickup-note-label {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  font-size: 13px;
+}
+.pickup-note p {
+  font-size: 12px;
+  max-width: 620px;
+  color: var(--muted);
+}
+.visit-callout {
+  text-align: center;
+  padding-block: 80px 88px;
+  background: #eae7d9;
+}
+.visit-callout h2 {
+  font-size: clamp(40px, 4.3vw, 64px);
+  line-height: 1.12;
+  margin: 24px 0 32px;
+}
+.visit-callout .paper-link {
+  min-width: 280px;
+}
+.quiet-phone {
+  display: block;
+  width: fit-content;
+  margin: 20px auto 0;
+  font-size: 13px;
+  padding: 8px;
+}
+.quiet-phone:hover {
+  text-decoration: underline;
+}
+.house-intro {
+  text-align: center;
+  padding-block: 34px 54px;
+}
+.house-intro h1 {
+  font-size: clamp(60px, 7.2vw, 112px);
+  margin: 25px auto 24px;
+  line-height: 1.03;
+}
+.house-intro p {
+  font-size: 15px;
+  line-height: 1.8;
+}
+.house-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 7%;
+  padding-inline: var(--site-gutter);
+  align-items: start;
+}
+.house-gallery figure {
+  margin: 0;
+}
+.house-gallery figure:nth-child(2) {
+  padding-top: 92px;
+}
+.house-gallery img {
+  height: 490px;
+  width: 100%;
+}
+.house-gallery figure:first-child img {
+  object-position: 50% 30%;
+}
+.house-gallery figure:nth-child(2) img {
+  height: 380px;
+}
+.house-gallery figcaption {
+  font:
+    400 13px/1.6 Poppins,
+    sans-serif;
+  color: var(--muted);
+  padding-top: 14px;
+}
+.house-story {
+  padding-block: 112px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 7%;
+}
+.house-story > .section-index {
+  padding-top: 12px;
+}
+.house-story h2 {
+  font-size: clamp(42px, 4.4vw, 68px);
+}
+.house-story-copy {
+  max-width: 590px;
+  margin: 30px 0;
+}
+.house-story-copy p {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+.house-diptych {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8%;
+  align-items: center;
+  padding-bottom: 112px;
+}
+.house-diptych > img {
+  width: 100%;
+  height: 480px;
+}
+.house-diptych h2 {
+  margin: 24px 0;
+  font-size: clamp(38px, 4vw, 62px);
+}
+.house-diptych p {
+  max-width: 380px;
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+.visit-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 9%;
+  padding-bottom: 92px;
+  align-items: start;
+}
+.visit-photo {
+  margin: 0;
+}
+.visit-photo img {
+  width: 100%;
+  height: 540px;
+  object-position: 50% 50%;
+}
+.visit-photo figcaption {
+  margin-top: 14px;
+  font: italic 20px/1.4 var(--serif);
+}
+.visit-details {
+  padding-top: 6px;
+}
+.visit-details address {
+  margin: 24px 0 28px;
+  font: 42px/1.2 var(--serif);
+  letter-spacing: -0.025em;
+}
+.visit-details address span {
+  color: var(--muted);
+}
+.visit-details > .paper-link {
+  width: 100%;
+  margin-bottom: 32px;
+}
+.visit-detail-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+  align-items: baseline;
+}
+.visit-detail-row > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.visit-detail-row a {
+  width: fit-content;
+  text-decoration: underline dotted;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 16px;
+}
+.visit-detail-row a:hover {
+  text-decoration: underline dotted;
+  text-underline-offset: 5px;
+}
+.visit-hours p {
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+.visit-hours a {
+  font-size: 13px;
+}
+.visit-small-note {
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.visit-pickup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  padding-block: 76px 92px;
+  background: #eae7d9;
+  align-items: center;
+}
+.visit-pickup h2 {
+  margin-top: 20px;
+  font-size: clamp(42px, 4.4vw, 66px);
+}
+.visit-pickup p {
+  font-size: 15px;
+  max-width: 440px;
+  margin-bottom: 18px;
+}
+.visit-pickup .paper-link {
+  margin-top: 10px;
+}
+.information-heading {
+  padding-block: 36px 64px;
+}
+.information-heading h1 {
+  font-size: clamp(58px, 7.2vw, 108px);
+  margin: 24px 0;
+}
+.information-heading > p {
+  font-size: 15px;
+}
+.information-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 8%;
+  padding-block: 48px 100px;
+  border-top: 1px solid var(--line);
+}
+.information-nav {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.information-nav a {
+  font-size: 13px;
+  padding-block: 8px;
+}
+.information-nav a:hover {
+  text-decoration: underline dotted;
+  text-underline-offset: 5px;
+}
+.information-copy {
+  max-width: 720px;
+}
+.information-copy section {
+  padding-bottom: 36px;
+  margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 120px;
+}
+.information-copy section:last-child {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.information-copy h2 {
+  font-size: 34px;
+  margin: 14px 0 22px;
+  line-height: 1.2;
+}
+.information-copy p {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+.information-copy address {
+  font-size: 15px;
+  font-style: normal;
+  line-height: 1.9;
+}
+.information-copy a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+/* Modal and purchase controls belong to the same paper-and-ink system. */
+.quantity {
+  height: 44px;
+}
+.quantity button {
+  width: 40px;
+}
+.cart-head .eyebrow,
+.clear-cart,
+.pickup-line,
+.checkout-notice,
+.cart-line p {
+  font-size: 12px;
+}
+.checkout input,
+.checkout textarea,
+.checkout select {
+  font-size: 16px;
+}
+.checkout label {
+  font-size: 13px;
+}
+.cart-total {
+  font-size: 14px;
+}
+.cart-bottom > p {
+  font-size: 13px;
+}
+.checkout-notice a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.field-error {
+  color: #9a3429;
+  font-size: 12px;
+  margin-top: 8px;
+}
+@media (max-width: 1100px) {
+  .house-gallery {
+    padding-inline: var(--site-gutter);
+    gap: 5%;
+  }
+  .house-gallery img {
+    height: 430px;
+  }
+  .house-gallery figure:nth-child(2) img {
+    height: 340px;
+  }
+  .visit-layout {
+    gap: 6%;
+  }
+  .visit-photo img {
+    height: 510px;
+  }
+  .visit-details address {
+    font-size: 37px;
+  }
+  .visit-detail-row {
+    grid-template-columns: 75px 1fr;
+    gap: 12px;
+  }
+}
+@media (max-width: 750px) {
+  .section-index {
+    font-size: 10px;
+  }
+  .paper-link {
+    font-size: 20px;
+    min-height: 56px;
+    padding: 12px 20px;
+  }
+  .pickup-note {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 24px;
+    padding: 22px 0;
+  }
+  .visit-callout {
+    padding-block: 56px 60px;
+  }
+  .visit-callout h2 {
+    font-size: 40px;
+    margin-block: 20px 28px;
+  }
+  .house-intro {
+    padding-block: 22px 36px;
+  }
+  .house-intro h1 {
+    font-size: clamp(50px, 9vw, 72px);
+  }
+  .house-intro p {
+    font-size: 14px;
+  }
+  .house-gallery {
+    padding-inline: var(--site-gutter);
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .house-gallery img {
+    height: 300px;
+  }
+  .house-gallery figure:nth-child(2) {
+    padding-top: 60px;
+  }
+  .house-gallery figure:nth-child(2) img {
+    height: 250px;
+  }
+  .house-gallery figcaption {
+    font-size: 16px;
+  }
+  .house-story {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-block: 56px;
+  }
+  .house-story > .section-index {
+    padding: 0;
+  }
+  .house-story h2 {
+    font-size: 44px;
+  }
+  .house-story-copy {
+    margin-block: 24px;
+  }
+  .house-story-copy p {
+    font-size: 14px;
+  }
+  .house-diptych {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-bottom: 56px;
+  }
+  .house-diptych > img {
+    height: 350px;
+  }
+  .house-diptych h2 {
+    font-size: 42px;
+  }
+  .house-diptych p {
+    font-size: 14px;
+  }
+  .visit-layout {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    padding-bottom: 56px;
+  }
+  .visit-photo img {
+    height: auto;
+    aspect-ratio: 1.12;
+  }
+  .visit-photo figcaption {
+    font-size: 18px;
+  }
+  .visit-details address {
+    font-size: 40px;
+    margin-block: 20px 24px;
+  }
+  .visit-details > .paper-link {
+    margin-bottom: 26px;
+  }
+  .visit-detail-row {
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+  }
+  .visit-pickup {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 48px 56px;
+  }
+  .visit-pickup h2 {
+    font-size: 42px;
+  }
+  .visit-pickup p {
+    font-size: 14px;
+  }
+  .information-heading {
+    padding-block: 24px 40px;
+  }
+  .information-heading h1 {
+    font-size: 58px;
+  }
+  .information-heading > p {
+    font-size: 14px;
+  }
+  .information-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-block: 26px 60px;
+  }
+  .information-nav {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .information-nav a {
+    font-size: 12px;
+  }
+  .information-copy h2 {
+    font-size: 30px;
+  }
+  .information-copy p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  .house-gallery {
+    gap: 12px;
+  }
+  .house-gallery img {
+    height: 235px;
+  }
+  .house-gallery figure:nth-child(2) img {
+    height: 200px;
+  }
+  .house-gallery figcaption {
+    font-size: 15px;
+  }
+  .house-intro h1 {
+    font-size: 52px;
+  }
+  .house-intro p br {
+    display: none;
+  }
+  .house-diptych > img {
+    height: 300px;
+  }
+  .visit-detail-row a {
+    font-size: 14px;
+  }
+  .visit-hours a {
+    font-size: 13px;
+  }
+}
+@media (max-width: 359px) {
+  .house-intro h1 {
+    font-size: 44px;
+  }
+  .visit-details address {
+    font-size: 36px;
+  }
+  .visit-detail-row {
+    grid-template-columns: 70px 1fr;
+  }
+  .visit-callout .paper-link {
+    min-width: 0;
+    width: 100%;
+  }
+  .visit-callout h2 {
+    font-size: 36px;
+  }
+  .information-heading h1 {
+    font-size: 50px;
+  }
+}
+/* Finish the home with the same scale and quieter spacing. */
+.home-house {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 10%;
+  padding-block: 80px 104px;
+}
+.home-house > img {
+  width: 100%;
+  height: 500px;
+  object-position: center 30%;
+}
+.home-house h2 {
+  font-size: clamp(44px, 4.4vw, 66px);
+  margin: 24px 0;
+}
+.home-house p {
+  max-width: 380px;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+.review-snapshot,
+.google-review-card figcaption > div > span {
+  font-size: 12px;
+}
+#main h1:focus {
+  outline: none;
+}
+.header .menu-toggle {
+  min-width: 44px;
+}
+@media (min-width: 1200px) and (hover: hover) and (pointer: fine) {
+  .selection-intro {
+    padding-bottom: 88px;
+  }
+  .selection-panel {
+    min-height: max(640px, 76svh);
+  }
+}
+@media (max-width: 750px) {
+  .home-house {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-block: 48px 64px;
+  }
+  .home-house > img {
+    height: 360px;
+  }
+  .home-house h2 {
+    font-size: 44px;
+  }
+  .home-house p {
+    font-size: 14px;
+  }
+}
+.not-found {
+  padding-block: 90px 112px;
+}
+.not-found h1 {
+  font-size: clamp(52px, 7vw, 100px);
+}
+.not-found > p {
+  margin-bottom: 28px;
+  font-size: 15px;
+}

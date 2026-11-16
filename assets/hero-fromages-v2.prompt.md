@@ -1,0 +1,7 @@
+# Hero fromages v2
+
+Generated with the built-in image_gen tool on 2026-10-12, at the user's request. Decorative hero illustration; original product photographs are preserved. Encoded as WebP for the website.
+
+## Prompt
+
+Use case: photorealistic-natural. Asset: premium French neighborhood cheesemonger website hero background, image only. Create an exceptionally natural editorial food photograph, wide panoramic composition approximately 3:1. An appetizing understated assortment of real French artisan cheeses on a matte warm charcoal stone counter: a wedge of aged Comté with subtly crystalline ivory interior, small ash-coated goat cheese with wrinkled natural rind, a cut bloomy-rind soft cheese, modest blue cheese wedge, a few delicate tête-de-moine rosettes. Arrange loose, asymmetrical, generous scale without crowding, cheeses concentrated toward the left and right thirds and lower edge, with a calm darker low-detail central horizontal area for a large cream website heading overlaid later. Keep several cheeses visible within a centered portrait crop for mobile. View from slightly above, realistic proportions, tactile rinds and creamy interiors, soft natural side daylight, gentle shadows, restrained warm-neutral palette, delicious rather than rustic theatrical. No sepia filter, no harsh yellow cast, no excessive props, no flowers, no fruit, no wooden boards, no labels or tags, no text, no lettering, no logo, no watermark, no graphic design, no border. High resolution panoramic photograph, refined but authentic.

@@ -1,0 +1,386 @@
+.selection {
+  padding: 112px var(--frame-inset) 0;
+  position: relative;
+  padding-inline: 0;
+}
+.selection-intro {
+  text-align: center;
+  padding: 0 5% 112px;
+}
+.selection-intro .eyebrow {
+  display: block;
+  margin-bottom: 16px;
+}
+.selection-intro h2 {
+  font-size: 56px;
+}
+.selection-stack {
+  position: relative;
+  isolation: isolate;
+  display: flow-root;
+}
+.selection-panel {
+  position: sticky;
+  top: calc(var(--nav-top) + var(--nav-height) - 1px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100svh - var(--nav-top) - var(--nav-height) - 22px);
+  margin-bottom: 24px;
+
+  background: #f3f2e9;
+  z-index: var(--panel-index);
+  overflow: hidden;
+}
+.selection-panel:last-child {
+  margin-bottom: 0;
+}
+.selection-photo {
+  position: relative;
+  min-height: 100%;
+  isolation: isolate;
+}
+.selection-photo img {
+  position: absolute;
+  object-fit: cover;
+  object-position: center 48%;
+}
+.selection-photo-main {
+  top: 0;
+  left: 9%;
+  width: 51%;
+  height: 75%;
+  z-index: 1;
+}
+.selection-photo-secondary {
+  bottom: 0;
+  left: 26%;
+  width: 57%;
+  height: 50%;
+}
+/* Offset portraits for the counter; a broad still life for the grocery. */
+.selection-panel--02 .selection-photo-main {
+  top: 4%;
+  left: 5%;
+  width: 47%;
+  height: 76%;
+}
+.selection-panel--02 .selection-photo-secondary {
+  bottom: 3%;
+  left: 57%;
+  width: 36%;
+  height: 62%;
+}
+.selection-panel--03 .selection-photo-main {
+  top: 6%;
+  left: 9%;
+  width: 80%;
+  height: 64%;
+}
+.selection-panel--03 .selection-photo-secondary {
+  bottom: 2%;
+  left: 17%;
+  width: 40%;
+  height: 43%;
+  z-index: 2;
+  border: 8px solid #f3f2e9;
+}
+.selection-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 75px 10% 85px;
+  background: #f3f2e9;
+}
+.selection-panel.reverse .selection-photo {
+  grid-column: 2;
+  grid-row: 1;
+}
+.selection-panel.reverse .selection-copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+.selection-copy h3 {
+  font: 400 48px/1.08 var(--serif);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  max-width: 550px;
+}
+.selection-copy > p {
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 425px;
+  margin: 30px 0;
+}
+.selection-copy .dotted-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 320px);
+  min-height: 64px;
+  padding: 12px 24px;
+  border: 2px dotted currentColor;
+  color: var(--ink);
+  font: 400 22px/1.4 var(--serif);
+  background: transparent;
+}
+@media (min-width: 1600px) {
+  .selection-copy h3 {
+    font-size: 88px;
+  }
+}
+@media (max-width: 1000px) {
+  .selection-panel {
+    position: relative;
+    top: auto;
+    min-height: 560px;
+  }
+  .selection-copy {
+    padding: 55px 8% 65px;
+  }
+  .selection-copy h3 {
+    font-size: 55px;
+  }
+  .selection-copy > p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .selection-intro {
+    padding-inline: 3%;
+  }
+  .selection-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    margin-bottom: 22px;
+    position: relative;
+    top: auto;
+  }
+  .selection-photo,
+  .selection-panel.reverse .selection-photo {
+    min-height: 0;
+    aspect-ratio: 1.05;
+
+    order: 0;
+  }
+  .selection-photo img {
+    object-position: center 45%;
+  }
+  .selection-copy,
+  .selection-panel.reverse .selection-copy {
+    order: 1;
+    padding: 45px 7% 55px;
+  }
+  .selection-copy h3 {
+    font-size: 48px;
+    max-width: 340px;
+  }
+  .selection-copy > p {
+    font-size: 14px;
+    margin: 23px 0 27px;
+    max-width: 315px;
+  }
+  .selection-copy .dotted-cta {
+    font-size: 20px;
+    min-height: 56px;
+    padding: 12px 16px;
+  }
+}
+@media (min-width: 1001px) and (max-height: 650px) {
+  .selection-panel {
+    min-height: 550px;
+    position: relative;
+    top: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selection-panel {
+    position: relative;
+    top: auto;
+  }
+}
+.google-reviews-heading {
+  text-align: center;
+}
+.google-reviews-heading .eyebrow {
+  display: block;
+}
+.google-reviews-layout {
+  display: grid;
+  align-items: center;
+  margin: auto;
+}
+.google-score {
+  text-align: center;
+}
+.google-score-number {
+  font: 108px/0.95 var(--serif);
+  letter-spacing: -0.06em;
+}
+.google-score-number > span {
+  letter-spacing: 0;
+  margin-left: 10px;
+}
+.review-stars {
+  display: block;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: #967013;
+}
+.google-score > .review-stars {
+  margin-top: 20px;
+}
+.google-score p {
+  margin-top: 12px;
+}
+.google-score .text-link {
+  margin-top: 20px;
+}
+.review-snapshot {
+  display: block;
+  margin-top: 17px;
+}
+.google-review-card {
+  margin: 0;
+}
+.google-review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.google-review-card blockquote {
+  font: 35px/1.3 var(--serif);
+  letter-spacing: -0.015em;
+}
+.google-review-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.review-avatar {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  font: 24px var(--serif);
+  flex-shrink: 0;
+}
+.google-review-card figcaption > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.google-review-card figcaption strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+.google-review-card figcaption > div > span {
+  font-size: 11px;
+}
+.google-review-card figcaption > a {
+  margin-left: auto;
+  padding: 8px;
+}
+@media (max-width: 850px) {
+  .google-reviews-layout {
+    gap: 5%;
+    grid-template-columns: 0.6fr 1.4fr;
+  }
+  .google-review-card {
+    padding: 28px;
+  }
+  .google-review-card blockquote {
+    font-size: 30px;
+  }
+  .google-score-number {
+    font-size: 86px;
+  }
+}
+@media (max-width: 600px) {
+  .google-score > .review-stars {
+    margin-top: 15px;
+  }
+  .google-score .text-link {
+    margin-top: 13px;
+  }
+  .google-review-card blockquote {
+    margin: 23px 0 28px;
+  }
+  .google-review-card figcaption {
+    gap: 11px;
+    align-items: flex-start;
+  }
+  .google-review-card figcaption > div > span {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .google-review-card figcaption > a {
+    padding: 5px;
+  }
+  .review-avatar {
+    width: 35px;
+    height: 35px;
+    font-size: 21px;
+  }
+}
+#root {
+  position: relative;
+  min-height: 100svh;
+}
+#main {
+  margin-inline: var(--frame-inset);
+}
+.wordmark,
+.wordmark * {
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+/* Fixed type sizes: changes happen only at these viewport breakpoints. */
+@media (min-width: 1600px) {
+  h1 {
+    font-size: 116px;
+  }
+  h2 {
+    font-size: 66px;
+  }
+  .selection-intro h2 {
+    font-size: 64px;
+  }
+}
+@media (min-width: 1001px) and (max-width: 1199px) {
+  .selection-copy h3 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 1150px) {
+  h1 {
+    font-size: 72px;
+  }
+  h2 {
+    font-size: 44px;
+  }
+}
+@media (max-width: 850px) {
+  h2 {
+    font-size: 38px;
+  }
+  .selection-intro h2 {
+    font-size: 44px;
+  }
+}
+@media (max-width: 600px) {
+  .selection-intro h2 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 359px) {
+  .selection-copy h3 {
+    font-size: 44px;
+  }
+}
