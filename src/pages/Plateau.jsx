@@ -19,9 +19,7 @@ export function PlateauPage({ cart, onAdd, onCart }) {
               les <em>plateaux</em>
             </h1>
             <p className="plateau-description">
-              Un plateau de fromages composé à la boutique, selon les fromages
-              du moment et vos envies. Pour un apéro, un repas ou une grande
-              tablée.
+              Un plateau composé selon les fromages du moment.
             </p>
             <ProductPurchaseForm
               product={plateau}
@@ -39,7 +37,8 @@ export function PlateauPage({ cart, onAdd, onCart }) {
       >
         <span>Et pour accompagner ?</span>
         <Link to="/autres-produits">L’épicerie</Link>
-        <Link to="/fromages">Les fromages à la coupe</Link>
+        <Link to="/raclettes">Les raclettes</Link>
+        <Link to="/fondues">Les fondues</Link>
       </nav>
     </div>
   );

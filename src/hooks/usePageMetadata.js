@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { products } from "../catalog";
+import { getProduct } from "../catalog";
 import { navigationLinks as links } from "../routes";
 export function usePageMetadata(path) {
   const previousPath = useRef(path);
@@ -10,7 +10,9 @@ export function usePageMetadata(path) {
       heading?.focus({ preventScroll: true });
       previousPath.current = path;
     }
-    const routeProduct = products.find((p) => path === `/produit/${p.id}`);
+    const routeProduct = path.startsWith("/produit/")
+      ? getProduct(path.slice("/produit/".length))
+      : undefined;
     const name =
       routeProduct?.name ||
       links.find(([to]) => to === path)?.[1] ||
@@ -27,8 +29,10 @@ export function usePageMetadata(path) {
       "/": "Fromagerie Guichard à Cachan. Fromages à la coupe, plateaux à partager et épicerie. Retrouvez-nous au 18 rue Guichard.",
       "/plateaux":
         "Choisissez un plateau de fromages à partager, de 4 à 12 personnes, à partir de 35 €. Retrait à la Fromagerie Guichard à Cachan.",
-      "/fromages":
-        "Comté, chèvres et tommettes : découvrez une sélection du comptoir de la Fromagerie Guichard, 18 rue Guichard à Cachan.",
+      "/raclettes":
+        "Composez votre raclette et ajoutez de la charcuterie. Retrait à la Fromagerie Guichard à Cachan.",
+      "/fondues":
+        "Choisissez votre fondue et vos accompagnements. Retrait à la Fromagerie Guichard à Cachan.",
       "/autres-produits":
         "Pâte de coing, pâtes de fruits et crèmerie : les accompagnements de la Fromagerie Guichard à Cachan.",
       "/a-propos":

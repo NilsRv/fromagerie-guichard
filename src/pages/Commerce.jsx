@@ -1,6 +1,6 @@
 import { ProductPurchaseForm } from "../components/ProductPurchaseForm";
 import { ProductInformation } from "../components/ProductInformation";
-import { MAX_QUANTITY } from "../domain/constants";
+import { addCartItem } from "../domain/cart";
 import { useRef, useState } from "react";
 import { ShoppingBasket } from "lucide-react";
 import { Link, Photo } from "../components/ui";
@@ -10,10 +10,7 @@ import { ProductGallery } from "../components/ProductGallery";
 
 function CatalogCard({ product: p, cart, onAdd, onCart, onQuickShop }) {
   const cut = Boolean(p.pricePerKg);
-  const atLimit =
-    !cut &&
-    (cart.find((line) => line.id === p.id && line.option === p.options[0])
-      ?.quantity || 0) >= MAX_QUANTITY;
+  const atLimit = !cut && addCartItem(cart, p, p.options[0]) === cart;
   return (
     <article className="selection-product">
       <div className="catalog-product-media">
@@ -100,7 +97,7 @@ export function ProductList({ items, cart, onAdd, onCart }) {
     </>
   );
 }
-export function ProductPage({ product: p, cart, onAdd, onCart }) {
+export function ProductPage({ product: p, cart, onAdd, onAddMany, onCart }) {
   const siblings = products.filter(
     (item) => item.category === p.category && item.id !== p.id,
   );
@@ -111,16 +108,14 @@ export function ProductPage({ product: p, cart, onAdd, onCart }) {
         aria-labelledby="product-title"
       >
         <div className="plateau-layout">
-          <ProductGallery
-            photos={[{ name: p.image, label: p.name }]}
-            caption="Photographie de notre sélection. Disponibilité à confirmer avec la boutique."
-          />
+          <ProductGallery photos={[{ name: p.image, label: p.name }]} />
           <div className="plateau-details">
             <h1 id="product-title">
               <em>{p.name}</em>
             </h1>
             <p className="plateau-description">{p.description}</p>
             <ProductPurchaseForm
+              onAddMany={onAddMany}
               product={p}
               cart={cart}
               onAdd={onAdd}

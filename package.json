@@ -14,7 +14,8 @@
     "format": "prettier --write src server tests index.html vite.config.js package.json",
     "format:check": "prettier --check src server tests index.html vite.config.js package.json",
     "check": "npm test && npm run format:check && npm run build",
-    "test:quick-shop": "node audit/quick-shop-check.mjs"
+    "test:quick-shop": "node audit/quick-shop-check.mjs",
+    "test:commerce": "node audit/commerce-interactions-check.mjs"
   },
   "dependencies": {
     "express": "^4.21.2",

@@ -107,7 +107,7 @@ function Home() {
       <section
         className="selection"
         id="selection"
-        aria-label="Plateaux, fromages et à-côtés"
+        aria-label="Plateaux, raclettes, fondues et épicerie"
       >
         <div className="selection-intro">
           <h2>
@@ -118,6 +118,7 @@ function Home() {
           {[
             {
               to: "/plateaux",
+              imageAlt: "Un plateau de fromages préparé à la boutique",
               image: "fromages1.webp",
               secondaryImage: "plateau2.webp",
               secondaryAlt: "Un second plateau de la fromagerie",
@@ -127,24 +128,37 @@ function Home() {
               num: "01",
             },
             {
-              to: "/fromages",
-              image: "comptoir2.webp",
-              secondaryImage: "fromage-enavant.webp",
-              secondaryAlt: "Un fromage sélectionné au comptoir",
-              title: "les fromages",
-              text: "Des chèvres, des tommes, des pâtes crémeuses. Vos classiques et les découvertes du comptoir, à choisir avec votre fromager.",
-              cta: "Explorer les fromages",
+              to: "/raclettes",
+              imageAlt: "La sélection de fromages de la boutique",
+              image: "comptoir.webp",
+              secondaryImage: "comptoir2.webp",
+              secondaryAlt: "La sélection de fromages au comptoir",
+              title: "les raclettes",
+              text: "Les fromages tranchés pour votre raclette, avec de la charcuterie si vous le souhaitez.",
+              cta: "Découvrir les raclettes",
               num: "02",
             },
             {
+              to: "/fondues",
+              imageAlt: "Les fromages du comptoir",
+              image: "fromage-enavant.webp",
+              secondaryImage: "comptoir7.webp",
+              secondaryAlt: "Les fromages de la boutique",
+              title: "les fondues",
+              text: "Savoyarde ou suisse, un mélange de fromages préparé pour votre tablée.",
+              cta: "Découvrir les fondues",
+              num: "03",
+            },
+            {
               to: "/autres-produits",
+              imageAlt: "Les pâtes de coing de la fromagerie",
               image: "pate-de-coing.webp",
               secondaryImage: "pates-de-fruits.webp",
               secondaryAlt: "Les pâtes de fruits de la boutique",
               title: "l'épicerie",
               text: "Pâte de coing, pâtes de fruits, crèmerie. De quoi accompagner votre sélection ou terminer sur une note sucrée.",
               cta: "Découvrir l’épicerie",
-              num: "03",
+              num: "04",
             },
           ].map((item, i) => (
             <article
@@ -156,13 +170,7 @@ function Home() {
                 <Photo
                   name={item.image}
                   className="selection-photo-main"
-                  alt={
-                    i === 0
-                      ? "Un plateau de fromages préparé à la boutique"
-                      : i === 1
-                        ? "Les chèvres et fromages du comptoir"
-                        : "Les pâtes de coing de la fromagerie"
-                  }
+                  alt={item.imageAlt}
                 />
                 <Photo
                   name={item.secondaryImage}

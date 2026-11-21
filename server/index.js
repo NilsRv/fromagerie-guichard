@@ -1,4 +1,4 @@
-import { publicRoutes } from "../src/routes.js";
+import { publicRoutes, routeRedirects } from "../src/routes.js";
 import express from "express";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -11,7 +11,7 @@ import {
   unlink,
 } from "node:fs/promises";
 import { randomUUID, randomBytes, timingSafeEqual } from "node:crypto";
-import { products, plateauProductPaths } from "../src/catalog.js";
+import { products } from "../src/catalog.js";
 import { validateOrder } from "./validation.js";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const data = process.env.DATA_DIR || path.join(root, ".data");
@@ -48,8 +48,18 @@ app.use((req, res, next) => {
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
   next();
 });
-app.get(plateauProductPaths, (req, res) => res.redirect(301, "/plateaux"));
-app.use("/api", express.json({ limit: "20kb" }));
+for (const [source, destination] of Object.entries(routeRedirects)) {
+  app.get(source, (req, res) =>
+    res.redirect(
+      301,
+      destination +
+        (req.originalUrl.includes("?")
+          ? req.originalUrl.slice(req.originalUrl.indexOf("?"))
+          : ""),
+    ),
+  );
+}
+app.use("/api", express.json({ limit: "80kb" }));
 app.use("/api", (req, res, next) => {
   res.setHeader("Cache-Control", "no-store");
   if (req.method !== "GET" && req.headers.origin) {

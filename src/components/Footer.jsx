@@ -1,3 +1,4 @@
+import { navigationLinks } from "../routes";
 import { memo, useEffect, useRef } from "react";
 import { Link } from "./ui";
 import { Wordmark } from "./Wordmark";
@@ -50,13 +51,18 @@ function Footer() {
         </Link>
         <div className="footer-columns">
           <nav className="footer-column" aria-label="Les produits">
-            <Link to="/plateaux">Plateaux</Link>
-            <Link to="/fromages">Fromages</Link>
-            <Link to="/autres-produits">Épicerie</Link>
+            {navigationLinks.slice(0, 4).map(([to, label]) => (
+              <Link key={to} to={to}>
+                {label}
+              </Link>
+            ))}
           </nav>
           <nav className="footer-column" aria-label="La fromagerie">
-            <Link to="/a-propos">La maison</Link>
-            <Link to="/contact">Contact</Link>
+            {navigationLinks.slice(4).map(([to, label]) => (
+              <Link key={to} to={to}>
+                {label}
+              </Link>
+            ))}
           </nav>
           <address className="footer-column footer-address">
             <a href={googleUrl} target="_blank" rel="noreferrer">

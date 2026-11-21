@@ -1,6 +1,48 @@
 // Fromages et épicerie : tarifs fictifs de maquette.
 export const products = [
   {
+    id: "raclette",
+    category: "raclettes",
+    name: "La raclette",
+    description: "Choisissez vos fromages et le nombre de portions.",
+    detail:
+      "Fromages à raclette tranchés, par portions de 250 g. Nature, fumée, ail des ours, morbier ou 5 baies.",
+    image: "comptoir.webp",
+    options: ["Nature", "Fumée", "Ail des ours", "Morbier", "5 baies"],
+    portionGrams: 250,
+    prices: {
+      Nature: 6.9,
+      Fumée: 7.9,
+      "Ail des ours": 8.9,
+      Morbier: 6.9,
+      "5 baies": 8,
+    },
+    allergens:
+      "Lait. Composition de la charcuterie à vérifier avec la boutique.",
+  },
+  {
+    id: "fondue",
+    category: "fondues",
+    name: "La fondue",
+    description: "Choisissez votre fondue et le nombre de convives.",
+    detail:
+      "Mélange de fromages pour fondue. Composition, portions et tarif confirmés par la boutique.",
+    image: "fromage-enavant.webp",
+    options: ["Savoyarde", "Suisse"],
+    peopleOptions: [4, 6, 10],
+    compositions: {
+      Savoyarde: "Abondance, Beaufort, Comté fruité",
+      Suisse: "Gruyère Suisse, Vacherin Fribourgeois",
+    },
+    weightLabels: { 4: "900 g", 6: "1,3 kg", 10: "2,2 kg" },
+    pricesByPeople: {
+      Savoyarde: { 4: 35, 6: 49, 10: 82 },
+      Suisse: { 4: 38, 6: 54, 10: 90 },
+    },
+    allergens:
+      "Lait. Composition du mélange et de la charcuterie à vérifier avec la boutique.",
+  },
+  {
     id: "plateau",
     category: "plateaux",
     name: "Le plateau de fromages",
@@ -10,6 +52,11 @@ export const products = [
     tag: "À partager",
     options: ["4/5 personnes", "6/8 personnes", "10/12 personnes"],
     prices: { "4/5 personnes": 35, "6/8 personnes": 60, "10/12 personnes": 80 },
+    weightLabels: {
+      "4/5 personnes": "Environ 600 g",
+      "6/8 personnes": "1 kg",
+      "10/12 personnes": "1,5 kg",
+    },
     allergens:
       "Lait. Garnitures et autres allergènes à préciser avec la boutique.",
   },
@@ -108,6 +155,9 @@ export const products = [
     allergens: "Lait. Composition complète à vérifier selon le produit.",
   },
 ];
+const productsById = new Map(products.map((product) => [product.id, product]));
+export const getProduct = (id) => productsById.get(id);
+
 export const googleUrl = "https://share.google/83ThgcITq5lAPjdMK";
 
 export const legacyPlateauIds = [
@@ -119,12 +169,22 @@ export const plateauProductPaths = ["plateau", ...legacyPlateauIds].map(
   (id) => `/produit/${id}`,
 );
 
-const priceFormatter = new Intl.NumberFormat("fr-FR", {
+const integerPriceFormatter = new Intl.NumberFormat("fr-FR", {
   style: "currency",
   currency: "EUR",
   maximumFractionDigits: 0,
 });
-export const formatPrice = (value) => priceFormatter.format(value);
+const decimalPriceFormatter = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+export const formatPrice = (value) =>
+  (Number.isInteger(value)
+    ? integerPriceFormatter
+    : decimalPriceFormatter
+  ).format(value);
 export const legacyPlateauOptions = {
   "4 personnes": "4/5 personnes",
   "6 personnes": "6/8 personnes",

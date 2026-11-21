@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { readCart, addCartItem } from "../domain/cart";
+import { readCart, addCartItem, addCartItems } from "../domain/cart";
 import { CART_STORAGE_KEY } from "../domain/constants";
 export function useCart() {
   const [cart, setCart] = useState(readCart);
@@ -9,9 +9,15 @@ export function useCart() {
     } catch {}
   }, [cart]);
   const add = useCallback(
-    (product, option, quantity = 1) =>
-      setCart((current) => addCartItem(current, product, option, quantity)),
+    (product, option, quantity = 1, customization) =>
+      setCart((current) =>
+        addCartItem(current, product, option, quantity, customization),
+      ),
     [],
   );
-  return { cart, setCart, add };
+  const addMany = useCallback(
+    (entries) => setCart((current) => addCartItems(current, entries)),
+    [],
+  );
+  return { cart, setCart, add, addMany };
 }

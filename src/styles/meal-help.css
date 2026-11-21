@@ -1,0 +1,107 @@
+.plateau-formats .meal-help-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 20px;
+}
+.meal-help-legend > .occasion-help {
+  margin-left: 0;
+  color: inherit;
+}
+.occasion-help {
+  position: relative;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+}
+.occasion-help-button {
+  position: absolute;
+  inset: -12px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  color: var(--muted);
+}
+.occasion-help-button > span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px dotted #a49687;
+  border-radius: 50%;
+  font:
+    400 11px/1 Poppins,
+    sans-serif;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+.occasion-help-button:hover > span,
+.occasion-help-button[aria-expanded="true"] > span {
+  background: #e7e2d5;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.occasion-help-button:focus-visible {
+  outline: none;
+}
+.occasion-help-button:focus-visible > span {
+  outline: 2px dotted var(--ink);
+  outline-offset: 4px;
+}
+.occasion-help-bubble {
+  position: fixed;
+  z-index: 80;
+  padding: 20px;
+  border: 2px dotted #bfb3a4;
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgb(81 58 49 / 6%);
+  display: grid;
+  font:
+    400 12px/1.65 Poppins,
+    sans-serif;
+  text-align: left;
+  animation: occasion-help-in 160ms ease-out both;
+  --help-drift: -4px;
+}
+.occasion-help-bubble[data-above] {
+  --help-drift: 4px;
+}
+.occasion-help-item {
+  display: grid;
+  gap: 6px;
+}
+.occasion-help-item + .occasion-help-item {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 16px;
+}
+.occasion-help-item strong {
+  font: 400 19px/1.3 var(--serif);
+  font-variant-numeric: lining-nums;
+}
+.occasion-help-item > span {
+  color: var(--muted);
+}
+@keyframes occasion-help-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--help-drift));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .occasion-help-bubble {
+    animation: none;
+  }
+  .occasion-help-button > span {
+    transition: none;
+  }
+}

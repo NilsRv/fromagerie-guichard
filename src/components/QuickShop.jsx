@@ -1,3 +1,4 @@
+import { addCartItem } from "../domain/cart";
 import { MAX_QUANTITY } from "../domain/constants";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -27,6 +28,7 @@ export function QuickShop({
   const remaining = Math.max(0, MAX_QUANTITY - existing);
   const amount = Math.min(quantity, remaining);
   const unitPrice = p.prices[option];
+  const canAdd = amount > 0 && addCartItem(cart, p, option, amount) !== cart;
 
   useEffect(() => {
     const element = dialog.current;
@@ -70,7 +72,7 @@ export function QuickShop({
   }
   function submit(e) {
     e.preventDefault();
-    if (closing.current || amount < 1) return;
+    if (closing.current || !canAdd) return;
     close(() => {
       onAdd(p, option, amount);
       onCart();
@@ -164,16 +166,15 @@ export function QuickShop({
               <button
                 type="submit"
                 className="plateau-add"
-                disabled={remaining === 0 || leaving}
+                disabled={!canAdd || leaving}
               >
-                {remaining === 0 ? "Limite atteinte" : "Ajouter au panier"}
+                {!canAdd ? "Limite atteinte" : "Ajouter au panier"}
                 <Plus size={18} />
               </button>
             </div>
-            {remaining === 0 && (
+            {!canAdd && (
               <p className="quick-shop-limit" role="status">
-                Vous avez déjà {MAX_QUANTITY} articles de ce format dans votre
-                panier.
+                Votre panier a atteint sa limite pour cette sélection.
               </p>
             )}
           </form>

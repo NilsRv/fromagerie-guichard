@@ -4,9 +4,6 @@ import { MapPin } from "lucide-react";
 import { products, googleUrl } from "../catalog";
 import { Link, Photo, DottedLink } from "../components/ui";
 const collections = {
-  fromages: {
-    label: "Les fromages",
-  },
   "autres-produits": {
     label: "L’épicerie",
   },
@@ -34,15 +31,7 @@ export function Catalog({ type, cart, onAdd, onCart }) {
     <div className={`collection-page collection-page--${type}`}>
       <header className="selection-heading page-pad">
         <h1>
-          {type === "fromages" ? (
-            <>
-              les <em>fromages</em>
-            </>
-          ) : (
-            <>
-              l’<em>épicerie</em>
-            </>
-          )}
+          l’<em>épicerie</em>
         </h1>
       </header>
       <section className="selection-catalog page-pad" aria-label={c.label}>
@@ -50,11 +39,7 @@ export function Catalog({ type, cart, onAdd, onCart }) {
           <div
             className="selection-filters"
             role="group"
-            aria-label={
-              type === "fromages"
-                ? "Filtrer les fromages"
-                : "Filtrer l’épicerie"
-            }
+            aria-label="Filtrer l’épicerie"
           >
             {tags.map((t) => (
               <button
@@ -79,9 +64,8 @@ export function Catalog({ type, cart, onAdd, onCart }) {
       >
         <span>Et pour accompagner ?</span>
         <Link to="/plateaux">Les plateaux</Link>
-        <Link to={type === "fromages" ? "/autres-produits" : "/fromages"}>
-          {type === "fromages" ? "L’épicerie" : "Les fromages"}
-        </Link>
+        <Link to="/raclettes">Les raclettes</Link>
+        <Link to="/fondues">Les fondues</Link>
       </nav>
     </div>
   );
@@ -117,7 +101,6 @@ export function About() {
             alt="Le fromager au travail derrière son comptoir"
             priority
           />
-          <figcaption>Le geste, au quotidien.</figcaption>
         </figure>
         <figure>
           <Photo
@@ -125,7 +108,6 @@ export function About() {
             alt="Les fromages et l’intérieur de la boutique Guichard"
             priority
           />
-          <figcaption>Notre adresse, à Cachan.</figcaption>
         </figure>
       </div>
       <section className="house-story page-pad">
@@ -148,7 +130,7 @@ export function About() {
             </p>
             <p>Et si vous hésitez, la conversation fait le reste.</p>
           </div>
-          <DottedLink to="/fromages">Un tour au comptoir</DottedLink>
+          <DottedLink to="/raclettes">Découvrir les raclettes</DottedLink>
         </div>
       </section>
       <section className="house-diptych page-pad">

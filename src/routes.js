@@ -1,25 +1,35 @@
 import { plateauProductPaths } from "./catalog.js";
 export const navigationLinks = [
   ["/plateaux", "Plateaux"],
-  ["/fromages", "Fromages"],
+  ["/raclettes", "Raclettes"],
+  ["/fondues", "Fondues"],
   ["/autres-produits", "Épicerie"],
   ["/a-propos", "La maison"],
   ["/contact", "Contact"],
 ];
-export const routeName = () => {
+export const routeRedirects = {
+  "/fromages": "/raclettes",
+  ...Object.fromEntries(plateauProductPaths.map((path) => [path, "/plateaux"])),
+  "/produit/raclette": "/raclettes",
+  "/produit/fondue": "/fondues",
+};
+export const seasonalProducts = {
+  "/raclettes": "raclette",
+  "/fondues": "fondue",
+};
+export function routeName() {
   const path = window.location.pathname.replace(/\/$/, "") || "/";
-  if (plateauProductPaths.includes(path)) {
+  const destination = routeRedirects[path];
+  if (destination)
     history.replaceState(
       history.state,
       "",
-      `/plateaux${window.location.search}${window.location.hash}`,
+      `${destination}${window.location.search}${window.location.hash}`,
     );
-    return "/plateaux";
-  }
-  return path;
-};
+  return destination || path;
+}
 
-export const collectionPaths = new Set(["/fromages", "/autres-produits"]);
+export const collectionPaths = new Set(["/autres-produits"]);
 export const publicRoutes = new Set([
   "/",
   ...navigationLinks.map(([path]) => path),

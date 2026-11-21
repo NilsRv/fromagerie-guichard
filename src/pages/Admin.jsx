@@ -1,3 +1,4 @@
+import { customizationSummary } from "../domain/customization";
 import "../styles/admin.css";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
@@ -125,6 +126,11 @@ export default function Admin() {
                     {o.items.map((x, i) => (
                       <li key={i}>
                         {x.quantity} × {x.name} · {x.option}
+                        {x.customization && (
+                          <p className="admin-note">
+                            {customizationSummary(x.customization)}
+                          </p>
+                        )}
                       </li>
                     ))}
                   </ul>

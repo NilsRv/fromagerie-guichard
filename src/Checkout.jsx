@@ -1,3 +1,5 @@
+import { MAX_COMMENT_LENGTH } from "./domain/constants";
+import { customizationSummary } from "./domain/customization";
 import { useState, useRef } from "react";
 import { Phone, Check, Download } from "lucide-react";
 export function dateOffset(days) {
@@ -158,7 +160,7 @@ export function Checkout({ cart, onBack, onSubmitted }) {
       <textarea
         id="pickup-note"
         rows="3"
-        maxLength="500"
+        maxLength={MAX_COMMENT_LENGTH}
         placeholder="Un fromage préféré, une occasion…"
         value={note}
         onChange={(e) => setNote(e.target.value)}
@@ -196,7 +198,7 @@ export function Checkout({ cart, onBack, onSubmitted }) {
 }
 export function Receipt({ receipt, products, onClose }) {
   function download() {
-    const text = `FROMAGERIE GUICHARD\nDemande ${receipt.reference} — À confirmer\nRetrait souhaité : ${receipt.date}, ${receipt.slot}\n\n${receipt.items.map((x) => `${x.quantity} × ${products.find((p) => p.id === x.id)?.name} — ${x.option}`).join("\n")}\n${receipt.note ? `\nNote : ${receipt.note}` : ""}\n\nDisponibilité, prix et horaire à confirmer avec la boutique.\n18 rue Guichard, 94230 Cachan — 01 46 64 26 10\n`;
+    const text = `FROMAGERIE GUICHARD\nDemande ${receipt.reference} — À confirmer\nRetrait souhaité : ${receipt.date}, ${receipt.slot}\n\n${receipt.items.map((x) => `${x.quantity} × ${products.find((p) => p.id === x.id)?.name} — ${x.option}${x.customization ? ` — ${customizationSummary(x.customization)}` : ""}`).join("\n")}\n${receipt.note ? `\nNote : ${receipt.note}` : ""}\n\nDisponibilité, prix et horaire à confirmer avec la boutique.\n18 rue Guichard, 94230 Cachan — 01 46 64 26 10\n`;
     const url = URL.createObjectURL(
       new Blob([text], { type: "text/plain;charset=utf-8" }),
     );

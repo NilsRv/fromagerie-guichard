@@ -94,7 +94,8 @@ try {
     for (const route of [
       "/",
       "/plateaux",
-      "/fromages",
+      "/raclettes",
+      "/fondues",
       "/autres-produits",
       "/a-propos",
       "/contact",
@@ -118,27 +119,45 @@ try {
       .getByRole("radio", { name: "6/8 personnes", exact: true })
       .check();
     await capture("plateau-selected");
-    await page.goto(base + "/fromages");
-    await page.getByRole("button", { name: "chèvre", exact: true }).click();
+    await page.getByRole("radio", { name: "dînatoire", exact: true }).check();
+    await page.getByRole("checkbox", { name: /Pâte de coing/ }).check();
+    await capture("plateau-dinatoire");
+    await page
+      .locator(".meal-comment textarea")
+      .fill("Sans bleu. Allergie aux noix.");
+    await capture("notes");
+    await page
+      .getByRole("button", { name: "Voir les poids des plateaux" })
+      .hover();
+    await page.getByRole("tooltip").waitFor();
+    await capture("help");
+    await page.keyboard.press("Escape");
+    await page.goto(base + "/raclettes");
+    await page
+      .getByRole("spinbutton", { name: "Portions de Nature", exact: true })
+      .fill("2");
+    await page.getByRole("checkbox", { name: /Charcuterie/ }).check();
+    await capture("raclette-selected");
+    await page.goto(base + "/fondues");
+    await page.getByRole("radio", { name: "Suisse", exact: true }).check();
+    await page.getByRole("radio", { name: "6 personnes", exact: true }).check();
+    await capture("fondue-selected");
+    await page.goto(base + "/autres-produits");
+    await page.getByRole("button", { name: "douceurs", exact: true }).click();
     await capture("filtered");
     await page.getByRole("button", { name: "tous", exact: true }).click();
     await page.locator(".selection-product").first().hover();
     await capture("hover");
     await page
-      .getByRole("button", { name: "Achat rapide : Comté", exact: true })
-      .click();
-    await page.getByRole("radio", { name: "500 g", exact: true }).check();
-    await page.getByRole("combobox", { name: "Quantité", exact: true }).click();
-    await page.getByRole("option", { name: "3", exact: true }).click();
-    await capture("quick-shop");
-    await page.getByRole("combobox", { name: "Quantité", exact: true }).click();
-    await capture("quantity-menu");
-    await page.keyboard.press("Escape");
-    await page
-      .getByRole("button", { name: "Ajouter au panier", exact: true })
+      .getByRole("button", {
+        name: "Ajouter Pâte de coing au panier",
+        exact: true,
+      })
       .click();
     await capture("cart");
-    await page.getByRole("button", { name: /retrait/i, exact: true }).click();
+    await page
+      .getByRole("button", { name: "Préparer mon retrait", exact: true })
+      .click();
     await capture("checkout");
     await page.close();
     console.log(`Captured ${phase} ${width}px`);

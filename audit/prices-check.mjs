@@ -9,7 +9,7 @@ try {
       viewport: { width, height: 1000 },
       reducedMotion: "reduce",
     });
-    for (const route of ["fromages", "autres-produits"]) {
+    for (const route of ["autres-produits"]) {
       await page.goto("http://localhost:5174/" + route);
       assert.equal(await page.locator(".catalog-product-price").count(), 3);
       assert.equal(
@@ -65,12 +65,33 @@ try {
           slot: "Matin",
           note: "",
           consent: true,
-          items: [{ id: p.id, option, quantity: 2, unitPrice: 0 }],
+          items: [
+            {
+              id: p.id,
+              option,
+              quantity: 2,
+              unitPrice: 0,
+              ...(["raclette", "fondue"].includes(p.id)
+                ? {
+                    customization: {
+                      ...(p.id === "raclette"
+                        ? { portions: 1 }
+                        : { people: 4 }),
+                      extras: [],
+                      comment: "",
+                    },
+                  }
+                : {}),
+            },
+          ],
         },
         now,
       );
       assert.equal(r.ok, true);
-      assert.equal(r.value.items[0].unitPrice, p.prices[option]);
+      assert.equal(
+        r.value.items[0].unitPrice,
+        p.peopleOptions ? p.pricesByPeople[option][4] : p.prices[option],
+      );
     }
   }
   console.log(

@@ -1,7 +1,13 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 
-export function QuantitySelect({ value, max, disabled, onChange }) {
+export function QuantitySelect({
+  value,
+  max,
+  disabled,
+  onChange,
+  label = "Quantité",
+}) {
   const root = useRef(null);
   const trigger = useRef(null);
   const typed = useRef({ text: "", at: 0 });
@@ -44,7 +50,7 @@ export function QuantitySelect({ value, max, disabled, onChange }) {
         ref={trigger}
         type="button"
         role="combobox"
-        aria-label="Quantité"
+        aria-label={label}
         aria-describedby={`${id}-value`}
         aria-haspopup="listbox"
         aria-expanded={expanded}
@@ -106,12 +112,12 @@ export function QuantitySelect({ value, max, disabled, onChange }) {
       {expanded && (
         <div className="quantity-select-menu">
           <div className="quantity-select-heading" aria-hidden="true">
-            Quantité
+            {label}
           </div>
           <div
             id={id}
             role="listbox"
-            aria-label="Quantité"
+            aria-label={label}
             className="quantity-select-options"
           >
             {Array.from({ length: max }, (_, i) => i + 1).map((n) => (

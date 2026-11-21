@@ -1,5 +1,14 @@
-import { MAX_QUANTITY, MAX_CART_LINES } from "../src/domain/constants.js";
-import { products } from "../src/catalog.js";
+import {
+  normalizeCustomization,
+  lineUnitPrice,
+  hasUnpricedExtra,
+} from "../src/domain/customization.js";
+import {
+  MAX_QUANTITY,
+  MAX_CART_LINES,
+  MAX_COMMENT_LENGTH,
+} from "../src/domain/constants.js";
+import { getProduct } from "../src/catalog.js";
 export function validateOrder(body, now = new Date()) {
   const fail = (message) => ({ ok: false, message });
   if (!body || typeof body !== "object")
@@ -21,7 +30,7 @@ export function validateOrder(body, now = new Date()) {
     body.phone.replace(/\D/g, "").length < 9
   )
     return fail("Indiquez un numéro de téléphone valide.");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(body.date || ""))
+  if (typeof body.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(body.date))
     return fail("Choisissez un jour de retrait.");
   const date = new Date(body.date + "T12:00:00Z");
   const current = new Intl.DateTimeFormat("en-CA", {
@@ -49,8 +58,10 @@ export function validateOrder(body, now = new Date()) {
     return fail("Choisissez un créneau de retrait proposé.");
   if (body.consent !== true)
     return fail("Votre accord est nécessaire pour traiter votre demande.");
-  if (typeof body.note !== "string" || body.note.length > 500)
-    return fail("Votre commentaire doit contenir au plus 500 caractères.");
+  if (typeof body.note !== "string" || body.note.length > MAX_COMMENT_LENGTH)
+    return fail(
+      `Votre commentaire doit contenir au plus ${MAX_COMMENT_LENGTH} caractères.`,
+    );
   if (
     !Array.isArray(body.items) ||
     !body.items.length ||
@@ -61,7 +72,7 @@ export function validateOrder(body, now = new Date()) {
   for (const item of body.items) {
     if (!item || typeof item !== "object")
       return fail("Un article de votre panier est invalide.");
-    const product = products.find((p) => p.id === item.id);
+    const product = getProduct(item.id);
     if (
       !product ||
       !product.options.includes(item.option) ||
@@ -70,13 +81,23 @@ export function validateOrder(body, now = new Date()) {
       item.quantity > MAX_QUANTITY
     )
       return fail("Un article de votre panier est invalide.");
+    const customization = normalizeCustomization(product, item.customization);
+    if (customization === null)
+      return fail("Les préférences d’un article sont invalides.");
+    const unitPrice = lineUnitPrice({
+      id: product.id,
+      option: item.option,
+      customization,
+    });
     items.push({
       id: product.id,
       name: product.name,
       option: item.option,
       quantity: item.quantity,
-      ...(product.prices?.[item.option] !== undefined
-        ? { unitPrice: product.prices[item.option] }
+      ...(customization ? { customization } : {}),
+      ...(unitPrice !== undefined ? { unitPrice } : {}),
+      ...(hasUnpricedExtra({ customization })
+        ? { supplementToConfirm: true }
         : {}),
     });
   }

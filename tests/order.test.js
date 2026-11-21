@@ -89,3 +89,166 @@ test("plateau prices come from the server catalog", () => {
     assert.equal(result.value.items[0].unitPrice, unitPrice);
   }
 });
+test("preserves meal preferences and computes supplements from the catalog", () => {
+  const o = order();
+  o.items[0].customization = {
+    occasion: "dinatoire",
+    extras: ["coing", "charcuterie"],
+    comment: "Allergie aux noix",
+    price: 0,
+  };
+  const r = validateOrder(o, now);
+  assert.equal(r.ok, true);
+  assert.equal(r.value.items[0].unitPrice, 40);
+  assert.equal(r.value.items[0].supplementToConfirm, true);
+  assert.equal(r.value.items[0].customization.comment, "Allergie aux noix");
+  assert.equal(r.value.items[0].customization.price, undefined);
+});
+test("rejects invalid preparations, accompaniments, comments and person counts", () => {
+  for (const customization of [
+    { occasion: "inconnu", extras: [], comment: "" },
+    { occasion: "fin-de-repas", extras: ["charcuterie"], comment: "" },
+    { occasion: "dinatoire", extras: ["inconnu"], comment: "" },
+    { occasion: "dinatoire", extras: [], comment: "a".repeat(501) },
+  ]) {
+    const o = order();
+    o.items[0].customization = customization;
+    assert.equal(validateOrder(o, now).ok, false);
+  }
+  for (const people of [0, 21, 2.5, "2"]) {
+    const o = order();
+    o.items = [
+      {
+        id: "raclette",
+        option: "Nature",
+        quantity: 1,
+        customization: { people, extras: [], comment: "" },
+      },
+    ];
+    assert.equal(validateOrder(o, now).ok, false);
+  }
+});
+test("accepts seasonal meals with confirmed prices and a charcuterie supplement", () => {
+  for (const [id, option] of [
+    ["raclette", "Nature"],
+    ["fondue", "Suisse"],
+  ]) {
+    const o = order();
+    o.items = [
+      {
+        id,
+        option,
+        quantity: 1,
+        customization: {
+          people: 6,
+          extras: ["charcuterie"],
+          comment: "Sans porc si possible",
+        },
+        unitPrice: 1,
+      },
+    ];
+    const r = validateOrder(o, now);
+    assert.equal(r.ok, true);
+    assert.equal(
+      id === "raclette"
+        ? r.value.items[0].customization.portions
+        : r.value.items[0].customization.people,
+      6,
+    );
+    assert.equal(r.value.items[0].unitPrice, id === "raclette" ? 41.4 : 54);
+    assert.equal(r.value.items[0].supplementToConfirm, true);
+  }
+});
+test("raclette portions use each confirmed price and reject client totals", () => {
+  for (const [option, price] of [
+    ["Nature", 6.9],
+    ["Fumée", 7.9],
+    ["Ail des ours", 8.9],
+    ["Morbier", 6.9],
+    ["5 baies", 8],
+  ]) {
+    const o = order();
+    o.items = [
+      {
+        id: "raclette",
+        option,
+        quantity: 1,
+        unitPrice: 0,
+        customization: { portions: 3, extras: [], comment: "" },
+      },
+    ];
+    const r = validateOrder(o, now);
+    assert.equal(r.ok, true);
+    assert.equal(r.value.items[0].unitPrice, Math.round(price * 3 * 100) / 100);
+    assert.equal(r.value.items[0].customization.portions, 3);
+  }
+});
+
+test("fondue prices match every type and party size, ignoring client prices", () => {
+  for (const [option, expected] of [
+    ["Savoyarde", { 4: 35, 6: 49, 10: 82 }],
+    ["Suisse", { 4: 38, 6: 54, 10: 90 }],
+  ]) {
+    for (const [people, price] of Object.entries(expected)) {
+      const o = order();
+      o.items = [
+        {
+          id: "fondue",
+          option,
+          quantity: 1,
+          unitPrice: 1,
+          customization: { people: Number(people), extras: [], comment: "" },
+        },
+      ];
+      const result = validateOrder(o, now);
+      assert.equal(result.ok, true);
+      assert.equal(result.value.items[0].unitPrice, price);
+    }
+  }
+  for (const people of [2, 5, 8, 12]) {
+    const o = order();
+    o.items = [
+      {
+        id: "fondue",
+        option: "Suisse",
+        quantity: 1,
+        customization: { people, extras: [], comment: "" },
+      },
+    ];
+    assert.equal(validateOrder(o, now).ok, false);
+  }
+});
+test("malformed preference objects and dates are rejected without throwing", () => {
+  for (const occasion of [{ toString: null }, [], 1, null, "constructor"]) {
+    const o = order();
+    o.items[0].customization = { occasion, extras: [], comment: "" };
+    assert.equal(validateOrder(o, now).ok, false);
+  }
+  assert.equal(
+    validateOrder({ ...order(), date: { toString: null } }, now).ok,
+    false,
+  );
+});
+test("comments and portions use the same limits as the purchase forms", async () => {
+  const { MAX_COMMENT_LENGTH, MAX_PORTIONS } =
+    await import("../src/domain/constants.js");
+  const o = order();
+  o.items = [
+    {
+      id: "raclette",
+      option: "Fumée",
+      quantity: 1,
+      customization: {
+        portions: MAX_PORTIONS,
+        extras: [],
+        comment: "a".repeat(MAX_COMMENT_LENGTH),
+      },
+    },
+  ];
+  assert.equal(validateOrder(o, now).ok, true);
+  o.items[0].customization.portions++;
+  assert.equal(validateOrder(o, now).ok, false);
+  o.items[0].customization.portions = 1;
+  o.items[0].customization.comment += "a";
+  assert.equal(validateOrder(o, now).ok, false);
+});

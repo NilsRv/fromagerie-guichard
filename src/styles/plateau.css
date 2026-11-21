@@ -9,8 +9,9 @@
   outline-color: var(--ink);
 }
 .plateau-order {
+  --product-top-space: 40px;
   padding-inline: var(--site-gutter);
-  padding-top: 40px;
+  padding-top: var(--product-top-space);
   padding-bottom: 72px;
 }
 .plateau-layout {
@@ -21,7 +22,7 @@
 }
 .plateau-gallery {
   position: sticky;
-  top: calc(var(--nav-height) + 32px);
+  top: calc(var(--nav-top) + var(--nav-height) + var(--product-top-space));
   display: grid;
   grid-template-columns: 64px minmax(0, 1fr);
   gap: 24px;
@@ -41,12 +42,6 @@
   height: min(76svh, 800px);
   min-height: 560px;
   object-fit: cover;
-}
-.plateau-gallery figcaption {
-  font-size: 12px;
-  line-height: 1.65;
-  color: var(--muted);
-  margin-top: 12px;
 }
 .plateau-thumbnails {
   display: flex;
@@ -86,6 +81,7 @@
   margin: 0 0 24px;
 }
 .plateau-description {
+  white-space: pre-line;
   font-size: 16px;
   line-height: 1.75;
   max-width: none;
@@ -283,7 +279,7 @@
 }
 @media (min-width: 1700px) {
   .plateau-order {
-    padding-top: 48px;
+    --product-top-space: 48px;
   }
   .plateau-description {
     font-size: 18px;
@@ -344,10 +340,6 @@
     padding: 0 0 5px;
     border: 0;
     border-bottom: 2px solid transparent;
-  }
-  .plateau-gallery figcaption {
-    margin-top: 10px;
-    font-size: 12px;
   }
   .plateau-order h1 {
     font-size: 54px;
@@ -441,6 +433,7 @@
 
 .plateau-format-copy {
   font: 400 var(--chip-font-size)/1.2 var(--serif);
+  font-variant-numeric: lining-nums;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -675,13 +668,12 @@
 }
 @media (max-width: 750px) {
   .plateau-order {
-    padding-top: 20px;
+    --product-top-space: 20px;
   }
   .plateau-gallery {
     display: block;
   }
   .plateau-thumbnails,
-  .plateau-gallery figcaption,
   .plateau-gallery-hit,
   .plateau-gallery-cursor {
     display: none;

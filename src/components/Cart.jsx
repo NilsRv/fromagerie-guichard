@@ -1,3 +1,9 @@
+import {
+  lineUnitPrice,
+  selectionTotal,
+  hasUnpricedExtra,
+  customizationSummary,
+} from "../domain/customization";
 import { MAX_QUANTITY } from "../domain/constants";
 import { changeCartQuantity } from "../domain/cart";
 import { useEffect, useState } from "react";
@@ -18,12 +24,9 @@ export function Cart({ cart, setCart, onClose }) {
     ...x,
     product: products.find((p) => p.id === x.id),
   }));
-  const pricedTotal = lines.reduce(
-    (sum, x) => sum + (x.product.prices?.[x.option] || 0) * x.quantity,
-    0,
-  );
+  const pricedTotal = selectionTotal(cart);
   const hasUnpriced = lines.some(
-    (x) => x.product.prices?.[x.option] === undefined,
+    (x) => lineUnitPrice(x) === undefined || hasUnpricedExtra(x),
   );
   function change(i, d) {
     setCart((current) => changeCartQuantity(current, i, d));
@@ -70,15 +73,23 @@ export function Cart({ cart, setCart, onClose }) {
         <>
           <div className="cart-lines">
             {lines.map((x, i) => (
-              <div className="cart-line" key={x.id + x.option}>
+              <div
+                className="cart-line"
+                key={x.id + x.option + JSON.stringify(x.customization)}
+              >
                 <Photo name={x.product.image} alt={x.product.name} />
                 <div>
                   <h3>{x.product.name}</h3>
                   <p>
                     {x.option}
-                    {x.product.prices?.[x.option] !== undefined &&
-                      ` · ${formatPrice(x.product.prices[x.option] * x.quantity)}`}
+                    {lineUnitPrice(x) !== undefined &&
+                      ` · ${formatPrice(lineUnitPrice(x) * x.quantity)}`}
                   </p>
+                  {x.customization && (
+                    <p className="cart-customization">
+                      {customizationSummary(x.customization)}
+                    </p>
+                  )}
                   <div className="quantity">
                     <button
                       onClick={() => change(i, -1)}
@@ -112,14 +123,17 @@ export function Cart({ cart, setCart, onClose }) {
           <div className="cart-bottom">
             <div className="cart-total">
               <span>
-                {hasUnpriced && pricedTotal ? "Total plateaux" : "Total"}
+                {hasUnpriced && pricedTotal ? "Sous-total connu" : "Total"}
               </span>
               <span>
                 {pricedTotal ? formatPrice(pricedTotal) : "À confirmer"}
               </span>
             </div>
             {hasUnpriced && pricedTotal > 0 && (
-              <p>Prix des autres produits à confirmer avec la boutique.</p>
+              <p>
+                Produits et suppléments non chiffrés à confirmer avec la
+                boutique.
+              </p>
             )}
             <p>
               Votre demande est confirmée par la boutique avant préparation.

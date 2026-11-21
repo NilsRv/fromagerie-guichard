@@ -102,13 +102,6 @@
 .house-gallery figure:nth-child(2) img {
   height: 380px;
 }
-.house-gallery figcaption {
-  font:
-    400 13px/1.6 Poppins,
-    sans-serif;
-  color: var(--muted);
-  padding-top: 14px;
-}
 .house-story {
   padding-block: 112px;
   display: grid;
@@ -163,10 +156,6 @@
   width: 100%;
   height: 540px;
   object-position: 50% 50%;
-}
-.visit-photo figcaption {
-  margin-top: 14px;
-  font: italic 20px/1.4 var(--serif);
 }
 .visit-details {
   padding-top: 6px;
@@ -415,9 +404,6 @@
   .house-gallery figure:nth-child(2) img {
     height: 250px;
   }
-  .house-gallery figcaption {
-    font-size: 16px;
-  }
   .house-story {
     grid-template-columns: 1fr;
     gap: 22px;
@@ -457,9 +443,6 @@
   .visit-photo img {
     height: auto;
     aspect-ratio: 1.12;
-  }
-  .visit-photo figcaption {
-    font-size: 18px;
   }
   .visit-details address {
     font-size: 40px;
@@ -524,9 +507,6 @@
   }
   .house-gallery figure:nth-child(2) img {
     height: 200px;
-  }
-  .house-gallery figcaption {
-    font-size: 15px;
   }
   .house-intro h1 {
     font-size: 52px;

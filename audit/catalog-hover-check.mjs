@@ -13,7 +13,7 @@ for (const engine of ["chromium", "webkit"]) {
       });
       const errors = [];
       page.on("pageerror", (e) => errors.push(e.message));
-      await page.goto(base + "/fromages");
+      await page.goto(base + "/autres-produits");
       await page.evaluate(() => document.fonts.ready);
       const cards = page.locator(".selection-product");
       const photo = cards.first().locator(".catalog-product-photo");
@@ -60,17 +60,15 @@ for (const engine of ["chromium", "webkit"]) {
       }
       if (width >= 751) await cards.first().hover();
       await page
-        .getByRole("button", { name: "Achat rapide : Comté", exact: true })
+        .getByRole("button", {
+          name: "Ajouter Pâte de coing au panier",
+          exact: true,
+        })
         .click();
-      assert.equal(
-        await page.getByRole("dialog", { name: "Comté", exact: true }).count(),
-        1,
-      );
-      await page
-        .getByRole("button", { name: "Fermer l’achat rapide", exact: true })
-        .click();
-      await page.locator(".quick-shop").waitFor({ state: "detached" });
-      await page.goto(base + "/fromages");
+      await page.locator(".cart-dialog").waitFor();
+      await page.keyboard.press("Escape");
+      await page.locator(".cart-dialog").waitFor({ state: "detached" });
+      await page.goto(base + "/autres-produits");
       await page.evaluate(async () => {
         await document.fonts.ready;
         await Promise.all(
@@ -92,7 +90,7 @@ for (const engine of ["chromium", "webkit"]) {
         fullPage: true,
       });
       console.log(
-        `PASS ${engine} ${width}px: dimensions, survol sans zoom, ouverture du quick shop et overflow.`,
+        `PASS ${engine} ${width}px: dimensions, survol sans zoom, ajout direct au panier et overflow.`,
       );
       await page.close();
     }

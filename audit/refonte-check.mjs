@@ -15,7 +15,8 @@ try {
     for (const route of [
       "/",
       "/plateaux",
-      "/fromages",
+      "/raclettes",
+      "/fondues",
       "/autres-produits",
       "/a-propos",
       "/contact",

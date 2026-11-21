@@ -1,6 +1,6 @@
 import { lazy, Suspense, useCallback, useState } from "react";
-import { products } from "./catalog";
-import { collectionPaths } from "./routes";
+import { getProduct } from "./catalog";
+import { collectionPaths, seasonalProducts } from "./routes";
 import { useShopNavigation } from "./hooks/useShopNavigation";
 import { usePageMetadata } from "./hooks/usePageMetadata";
 import { useCart } from "./hooks/useCart";
@@ -10,19 +10,20 @@ import Home from "./pages/Home";
 import { Cart } from "./components/Cart";
 import { DottedLink, NavigationProvider } from "./components/ui";
 import { Catalog, About, Contact, Info } from "./pages/Pages";
+import { SeasonalPage } from "./pages/Seasonal";
 import { PlateauPage } from "./pages/Plateau";
 import { ProductPage } from "./pages/Commerce";
 const Admin = lazy(() => import("./pages/Admin"));
 export default function App() {
   const { path, navigate } = useShopNavigation();
-  const { cart, setCart, add } = useCart();
+  const { cart, setCart, add, addMany } = useCart();
   const [cartOpen, setCartOpen] = useState(false);
   const openCart = useCallback(() => setCartOpen(true), []);
   const closeCart = useCallback(() => setCartOpen(false), []);
   usePageMetadata(path);
   const type = path.slice(1);
   const selectedProduct = path.startsWith("/produit/")
-    ? products.find((p) => path === `/produit/${p.id}`)
+    ? getProduct(path.slice("/produit/".length))
     : null;
   return (
     <NavigationProvider navigate={navigate}>
@@ -39,12 +40,22 @@ export default function App() {
           <Home />
         ) : path === "/plateaux" ? (
           <PlateauPage cart={cart} onAdd={add} onCart={openCart} />
+        ) : seasonalProducts[path] ? (
+          <SeasonalPage
+            key={path}
+            product={getProduct(seasonalProducts[path])}
+            cart={cart}
+            onAdd={add}
+            onAddMany={addMany}
+            onCart={openCart}
+          />
         ) : selectedProduct ? (
           <ProductPage
             key={selectedProduct.id}
             product={selectedProduct}
             cart={cart}
             onAdd={add}
+            onAddMany={addMany}
             onCart={openCart}
           />
         ) : collectionPaths.has(path) ? (

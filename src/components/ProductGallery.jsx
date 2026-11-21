@@ -6,15 +6,11 @@ const plateauPhotos = [
   { name: "fromages1.webp", label: "Autre composition de la fromagerie" },
   { name: "plateau2.webp", label: "Détail d’un plateau de la fromagerie" },
 ];
-export function ProductGallery({
-  photos = plateauPhotos,
-  caption = "Les compositions varient selon les fromages du moment.",
-}) {
-  if (photos.length === 1)
-    return <SingleProductImage photo={photos[0]} caption={caption} />;
-  return <GalleryCarousel photos={photos} caption={caption} />;
+export function ProductGallery({ photos = plateauPhotos }) {
+  if (photos.length === 1) return <SingleProductImage photo={photos[0]} />;
+  return <GalleryCarousel photos={photos} />;
 }
-function SingleProductImage({ photo, caption }) {
+function SingleProductImage({ photo }) {
   return (
     <div className="plateau-gallery plateau-gallery--single">
       <figure>
@@ -41,12 +37,11 @@ function SingleProductImage({ photo, caption }) {
             </div>
           </div>
         </div>
-        <figcaption>{caption}</figcaption>
       </figure>
     </div>
   );
 }
-function GalleryCarousel({ photos, caption }) {
+function GalleryCarousel({ photos }) {
   const galleryId = useId();
   const [photo, setPhoto] = useState(0);
   const carousel = useRef(null);
@@ -282,7 +277,6 @@ function GalleryCarousel({ photos, caption }) {
             ))}
           </div>
         </div>
-        <figcaption>{caption}</figcaption>
       </figure>
     </div>
   );

@@ -15,7 +15,8 @@ try {
     page.on("pageerror", (e) => errors.push(e.message));
     for (const route of [
       "/plateaux",
-      "/fromages",
+      "/raclettes",
+      "/fondues",
       "/autres-produits",
       "/a-propos",
       "/contact",
@@ -61,7 +62,8 @@ try {
         [390, 1440].includes(width) &&
         [
           "/plateaux",
-          "/fromages",
+          "/raclettes",
+          "/fondues",
           "/autres-produits",
           "/produit/comte",
         ].includes(route)
@@ -173,14 +175,14 @@ try {
   await page.goto(base + "/produit/plateau-apero");
   await page.waitForURL(base + "/plateaux");
   assert.equal(await page.locator("#plateau-title").count(), 1);
-  await page.goto(base + "/fromages");
+  await page.goto(base + "/autres-produits");
   const second = page.locator(".selection-product-heading a").nth(1);
   await second.scrollIntoViewIfNeeded();
   const position = await page.evaluate(() => scrollY);
   await second.click();
-  await page.waitForURL(base + "/produit/chevre");
+  await page.waitForURL(base + "/produit/fruits");
   await page.locator(".product-back").click();
-  await page.waitForURL(base + "/fromages");
+  await page.waitForURL(base + "/autres-produits");
   assert.ok(Math.abs((await page.evaluate(() => scrollY)) - position) < 5);
   assert.equal(
     (await page.request.get(base + "/produit/inconnu")).status(),

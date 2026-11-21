@@ -1,30 +1,12 @@
 import { launchBrowser } from "./helpers/browser.mjs";
-import { spawn } from "node:child_process";
-import { mkdtemp, readFile, mkdir, rm } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { startTestServer } from "./helpers/server.mjs";
+import { readFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import assert from "node:assert/strict";
-const dir = await mkdtemp(path.join(tmpdir(), "guichard-qa-"));
-const server = spawn(process.execPath, ["server/index.js"], {
-  env: { ...process.env, PORT: "0", DATA_DIR: dir },
-  stdio: "pipe",
-});
-let base;
+const server = await startTestServer();
+const { base, dir } = server;
 let browser;
 try {
-  await new Promise((resolve, reject) => {
-    server.stdout.on("data", (d) => {
-      if (d.toString().includes("http://localhost")) {
-        base = d.toString().match(/http:\/\/localhost:\d+/)[0];
-        resolve();
-      }
-    });
-    server.stderr.on("data", (d) => process.stderr.write(d));
-    server.on("error", reject);
-    server.on("exit", (code) => {
-      if (code) reject(new Error("Test server failed"));
-    });
-  });
   browser = await launchBrowser();
   const page = await browser.newPage({
     viewport: { width: 1440, height: 1000 },
@@ -91,7 +73,8 @@ try {
   await page.locator(".cart-dialog").waitFor({ state: "detached" });
   for (const route of [
     "/plateaux",
-    "/fromages",
+    "/raclettes",
+    "/fondues",
     "/autres-produits",
     "/a-propos",
     "/contact",
@@ -100,6 +83,22 @@ try {
     await page.goto(base + route);
     assert.equal(await page.locator("h1").count(), 1);
     assert.equal(await page.locator('[aria-label="Fil d’Ariane"]').count(), 0);
+    if (["/plateaux", "/raclettes", "/fondues"].includes(route)) {
+      await page.evaluate(() => document.fonts.ready);
+      const gallery = page.locator(".plateau-gallery");
+      const initialTop = await gallery.evaluate(
+        (el) => el.getBoundingClientRect().top,
+      );
+      await page.evaluate(() => scrollTo({ top: 24, behavior: "instant" }));
+      const scrolledTop = await gallery.evaluate(
+        (el) => el.getBoundingClientRect().top,
+      );
+      assert.ok(
+        Math.abs(scrolledTop - initialTop) < 0.5,
+        `Initial gallery jump on ${route}`,
+      );
+      await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
+    }
     assert.equal(
       await page.evaluate(
         () => document.documentElement.scrollWidth > innerWidth,
@@ -108,19 +107,97 @@ try {
       `Overflow on ${route}`,
     );
   }
-  await page.goto(base + "/fromages");
-  await page.getByRole("button", { name: "chèvre", exact: true }).click();
+  await page.goto(base + "/fondues");
+  assert.equal(
+    await page
+      .getByRole("group", { name: "votre fondue", exact: true })
+      .count(),
+    1,
+  );
+  await page
+    .getByRole("button", { name: "Découvrir la composition des fondues" })
+    .hover();
+  await page.getByRole("tooltip").waitFor();
+  assert.match(
+    await page.getByRole("tooltip").innerText(),
+    /Abondance, Beaufort, Comté fruité/,
+  );
+  assert.match(
+    await page.getByRole("tooltip").innerText(),
+    /Gruyère Suisse, Vacherin Fribourgeois/,
+  );
+  await page.keyboard.press("Escape");
+  await page
+    .getByRole("button", { name: "Voir les poids des fondues" })
+    .hover();
+  await page.getByRole("tooltip").waitFor();
+  const fondueWeights = await page.getByRole("tooltip").innerText();
+  for (const weight of ["900 g", "1,3 kg", "2,2 kg"])
+    assert.ok(fondueWeights.includes(weight));
+  await page.keyboard.press("Escape");
+  for (const [type, prices] of [
+    ["Savoyarde", [35, 49, 82]],
+    ["Suisse", [38, 54, 90]],
+  ]) {
+    await page.getByRole("radio", { name: type, exact: true }).check();
+    for (const [index, count] of [4, 6, 10].entries()) {
+      await page
+        .getByRole("radio", { name: `${count} personnes`, exact: true })
+        .check();
+      assert.equal(
+        (await page.locator(".plateau-price").innerText()).replace(/\s/g, ""),
+        `${prices[index]}€`,
+      );
+    }
+  }
+  await page.goto(base + "/autres-produits");
+  await page.getByRole("button", { name: "douceurs", exact: true }).click();
   assert.equal(await page.locator(".product-card").count(), 1);
   await page.getByRole("button", { name: "tous", exact: true }).click();
   assert.equal(await page.locator(".product-card").count(), 3);
   await page.goto(base + "/plateaux");
   await page.getByRole("radio", { name: "6/8 personnes", exact: true }).check();
+  await page.getByRole("radio", { name: /dînatoire/i }).check();
+  await page.getByRole("checkbox", { name: /Charcuterie/ }).check();
+  const notes = page.locator(".meal-comment textarea");
+  assert.equal(
+    await page.locator(".meal-comment").getAttribute("data-expanded"),
+    null,
+  );
+  await notes.focus();
+  await page
+    .getByRole("button", { name: "Préciser : envie de…", exact: true })
+    .click();
+  await page.keyboard.insertText("chèvre");
+  await page
+    .getByRole("button", { name: "Préciser : sans…", exact: true })
+    .click();
+  await page.keyboard.insertText("bleu");
+  assert.equal(await notes.inputValue(), "Envie de chèvre\nSans bleu");
+  await page
+    .getByRole("button", { name: "Préciser : sans…", exact: true })
+    .click();
+  assert.equal(await notes.inputValue(), "Envie de chèvre\nSans bleu");
+  assert.equal(
+    await notes.evaluate(
+      (el) =>
+        el === document.activeElement && el.selectionStart === el.value.length,
+    ),
+    true,
+  );
+  await page
+    .locator(".meal-comment textarea")
+    .fill("Sans bleu. Allergie aux noix.");
   await page.getByRole("button", { name: "Ajouter au panier" }).click();
   await page.reload();
   await page
     .getByRole("button", { name: "Ouvrir le panier, 1 article", exact: true })
     .click();
   assert.match(await page.locator(".cart-line").innerText(), /6\/8 personnes/);
+  assert.match(
+    await page.locator(".cart-line").innerText(),
+    /Allergie aux noix/,
+  );
   await page
     .getByRole("button", { name: "Augmenter Le plateau de fromages" })
     .click();
@@ -154,7 +231,12 @@ try {
   await page
     .getByRole("button", { name: "Télécharger mon récapitulatif" })
     .click();
-  assert.match((await downloadPromise).suggestedFilename(), /guichard-G-/);
+  const download = await downloadPromise;
+  assert.match(download.suggestedFilename(), /guichard-G-/);
+  const downloadedText = await readFile(await download.path(), "utf8");
+  assert.match(downloadedText, /Dînatoire/);
+  assert.match(downloadedText, /Charcuterie/);
+  assert.match(downloadedText, /Allergie aux noix/);
   await page.getByRole("button", { name: "Continuer la visite" }).click();
   assert.equal(await page.locator(".cart-count").innerText(), "(0)");
   assert.equal(
@@ -168,6 +250,11 @@ try {
   await page.getByRole("button", { name: "Ouvrir les demandes" }).click();
   await page.locator(".admin-order").waitFor();
   assert.equal(await page.locator(".admin-order").count(), 1);
+  assert.match(
+    await page.locator(".admin-order").innerText(),
+    /Allergie aux noix/,
+  );
+  assert.match(await page.locator(".admin-order").innerText(), /Dînatoire/);
   await page.locator(".admin-order select").selectOption("Confirmée");
   await page.waitForTimeout(200);
   await page.getByRole("button", { name: "Actualiser", exact: true }).click();
@@ -180,7 +267,8 @@ try {
     for (const route of [
       "/",
       "/plateaux",
-      "/fromages",
+      "/raclettes",
+      "/fondues",
       "/autres-produits",
       "/a-propos",
       "/contact",
@@ -228,13 +316,9 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: 7 routes, desktop/mobile/tablet, filters, cart persistence, quantities, checkout, download, server persistence, idempotency, admin auth and status, mobile menu, Escape, zero overflow or browser errors.",
+    "PASS: 8 routes, desktop/mobile/tablet, filters, cart persistence, quantities, checkout, download, server persistence, idempotency, admin auth and status, mobile menu, Escape, zero overflow or browser errors.",
   );
 } finally {
   await browser?.close();
-  if (server.exitCode === null) {
-    server.kill("SIGTERM");
-    await new Promise((r) => server.once("exit", r));
-  }
-  await rm(dir, { recursive: true, force: true });
+  await server.close();
 }
